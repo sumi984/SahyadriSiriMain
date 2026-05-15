@@ -48,7 +48,14 @@ Sahyadri-Siri is a community-driven conservation initiative and environmental mo
 
 ## 📷 Screenshots
 
-*(Add your screenshots here later)*
+<img width="357" height="793" alt="Screenshot 2026-05-07 221729" src="https://github.com/user-attachments/assets/eb22c379-d846-41cb-8bcc-ffe8b6feb5ab" />
+<img width="355" height="792" alt="Screenshot 2026-05-07 221750" src="https://github.com/user-attachments/assets/566f942e-b646-4110-994d-dcae281a5f07" />
+<img width="355" height="787" alt="Screenshot 2026-05-07 221417" src="https://github.com/user-attachments/assets/cd062668-802b-497a-9d6c-3e7eca460f3c" />
+<img width="357" height="791" alt="Screenshot 2026-05-07 214745" src="https://github.com/user-attachments/assets/66d63a2b-aacb-4002-9de8-b79689df2a27" />
+
+
+
+
 
 ---
 **SAHYADRI-SIRI ECOSYSTEM MONITORING PROJECT © 2026**
