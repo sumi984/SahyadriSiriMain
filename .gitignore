@@ -1,0 +1,28 @@
+# Build artifacts
+/build
+.gradle
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Android Studio / IntelliJ files
+*.iml
+.idea/workspace.xml
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetDropDown.xml
+.idea/kotlinc.xml
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Kotlin
+.kotlin
+
+# Logs
+*.log
