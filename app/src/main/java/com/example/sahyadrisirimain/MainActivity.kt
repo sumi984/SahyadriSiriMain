@@ -10,9 +10,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.*
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -488,11 +486,11 @@ class WaterQualityViewModel : ViewModel() {
 
     fun t(en: String, kn: String = "", mr: String = "", hi: String = "", ml: String = "", ta: String = ""): String {
         return when (selectedLanguage) {
-            "kn" -> if (kn.isEmpty()) en else kn
-            "mr" -> if (mr.isEmpty()) en else mr
-            "hi" -> if (hi.isEmpty()) en else hi
-            "ml" -> if (ml.isEmpty()) en else ml
-            "ta" -> if (ta.isEmpty()) en else ta
+            "kn" -> kn.ifEmpty { en }
+            "mr" -> mr.ifEmpty { en }
+            "hi" -> hi.ifEmpty { en }
+            "ml" -> ml.ifEmpty { en }
+            "ta" -> ta.ifEmpty { en }
             else -> en
         }
     }
@@ -561,7 +559,7 @@ class WaterQualityViewModel : ViewModel() {
                 }
                 override fun onCancelled(error: DatabaseError) {}
             })
-        } catch (e: Exception) {
+        } catch (ignored: Exception) {
             // Log or handle initial Firebase failure
         }
     }
@@ -680,42 +678,42 @@ fun MapScreen(viewModel: WaterQualityViewModel) {
         StreamPolyline(sharavathiPath, scores["stream1"] ?: 0) { score ->
             Toast.makeText(context, "${viewModel.t(en = "Sharavathi River Health", kn = "ಶರಾವತಿ ನದಿ ಆರೋಗ್ಯ")}: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(13.20, 75.15)), title = viewModel.t(en = "Sharavathi River", kn = "ಶರಾವತಿ ನದಿ"))
+        Marker(state = rememberMarkerState(position = LatLng(13.20, 75.15)), title = viewModel.t(en = "Sharavathi River", kn = "ಶರಾವತಿ ನದಿ"))
         
         // 2. Netravathi River (stream2)
         val netravathiPath = listOf(LatLng(12.85, 75.35), LatLng(12.91, 75.31), LatLng(12.97, 75.29), LatLng(13.03, 75.24))
         StreamPolyline(netravathiPath, scores["stream2"] ?: 0) { score ->
             Toast.makeText(context, "${viewModel.t(en = "Netravathi River Health", kn = "ನೇತ್ರಾವತಿ ನದಿ ಆರೋಗ್ಯ")}: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(12.94, 75.32)), title = viewModel.t(en = "Netravathi River", kn = "ನೇತ್ರಾವತಿ ನದಿ"))
+        Marker(state = rememberMarkerState(position = LatLng(12.94, 75.32)), title = viewModel.t(en = "Netravathi River", kn = "ನೇತ್ರಾವತಿ ನದಿ"))
 
         // 3. Tunga River (stream3)
         val tungaPath = listOf(LatLng(13.10, 74.95), LatLng(13.15, 75.00), LatLng(13.20, 75.05))
         StreamPolyline(tungaPath, scores["stream3"] ?: 0) { score ->
             Toast.makeText(context, "${viewModel.t(en = "Tunga River Health", kn = "ತುಂಗಾ ನದಿ ಆರೋಗ್ಯ")}: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(13.15, 75.00)), title = viewModel.t(en = "Tunga River", kn = "ತುಂಗಾ ನದಿ"))
+        Marker(state = rememberMarkerState(position = LatLng(13.15, 75.00)), title = viewModel.t(en = "Tunga River", kn = "ತುಂಗಾ ನದಿ"))
 
         // 4. Bhadra River (stream4)
         val bhadraPath = listOf(LatLng(13.05, 75.35), LatLng(13.10, 75.39), LatLng(13.14, 75.43))
         StreamPolyline(bhadraPath, scores["stream4"] ?: 0) { score ->
             Toast.makeText(context, "${viewModel.t(en = "Bhadra River Health", kn = "ಭದ್ರಾ ನದಿ ಆರೋಗ್ಯ")}: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(13.10, 75.39)), title = viewModel.t(en = "Bhadra River", kn = "ಭದ್ರಾ ನದಿ"))
+        Marker(state = rememberMarkerState(position = LatLng(13.10, 75.39)), title = viewModel.t(en = "Bhadra River", kn = "ಭದ್ರಾ ನದಿ"))
 
         // 5. KSIT Demo Spring (stream5)
         val demoPath = listOf(LatLng(12.87, 77.54), LatLng(12.872, 77.542))
         StreamPolyline(demoPath, scores["stream5"] ?: 0) { score ->
             Toast.makeText(context, "KSIT Demo Spring Health: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(12.87, 77.54)), title = "KSIT Demo Spring")
+        Marker(state = rememberMarkerState(position = LatLng(12.87, 77.54)), title = "KSIT Demo Spring")
 
         // 6. Home Demo Point (stream6)
         val homePath = listOf(LatLng(12.866, 77.5761), LatLng(12.8665, 77.5766))
         StreamPolyline(homePath, scores["stream6"] ?: 0) { score ->
             Toast.makeText(context, "Home Demo Point Health: $score", Toast.LENGTH_SHORT).show()
         }
-        Marker(state = MarkerState(position = LatLng(12.866, 77.5761)), title = "Home Demo Point")
+        Marker(state = rememberMarkerState(position = LatLng(12.866, 77.5761)), title = "Home Demo Point")
     }
 }
 
@@ -732,7 +730,6 @@ fun StreamPolyline(points: List<LatLng>, score: Int, onClick: (Int) -> Unit) {
 
 @Composable
 fun ReportScreen(viewModel: WaterQualityViewModel) {
-    val isKN = viewModel.selectedLanguage == "kn"
     var expanded by remember { mutableStateOf(false) }
     var selectedStream by remember { mutableStateOf("Sharavathi River") }
     var clarity by remember { mutableIntStateOf(2) }
@@ -906,7 +903,7 @@ fun ReportScreen(viewModel: WaterQualityViewModel) {
                                 fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token)
                                     .addOnSuccessListener { location ->
                                         if (location != null) {
-                                            currentCoords = "${String.format("%.2f", location.latitude)}° N, ${String.format("%.2f", location.longitude)}° E"
+                                            currentCoords = "${String.format(java.util.Locale.US, "%.2f", location.latitude)}° N, ${String.format(java.util.Locale.US, "%.2f", location.longitude)}° E"
                                             if (viewModel.isWithinRange(location.latitude, location.longitude, selectedStream)) {
                                                 locationVerified = true
                                                 liveLocationStatus = viewModel.t(en = "Location Verified ✓", kn = "ಸ್ಥಳ ದೃಢೀಕರಿಸಲಾಗಿದೆ ✓")
